@@ -1,0 +1,33 @@
+{
+  "name": "synova-research-console",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json --pretty false",
+    "native:assets": "esbuild src/main.tsx --bundle --format=iife --outfile=SynovaNative/Sources/SynovaNative/Resources/Web/app.js --jsx=automatic --platform=browser --target=es2020 --minify",
+    "native:build-local": "zsh SynovaNative/build-local.sh",
+    "native:launch-local": "\"SynovaNative/build/Synova.app/Contents/MacOS/Synova\"",
+    "native:run": "npm run native:assets && swift run --package-path SynovaNative",
+    "native:open": "open -a Xcode SynovaNative/Package.swift",
+    "ios:assets": "esbuild src/main.tsx --bundle --format=iife --outfile=SynovaIOS/Synova/Web/app.js --jsx=automatic --platform=browser --target=es2020 --minify",
+    "ios:icon": "node scripts/generate-ios-icon.mjs",
+    "ios:prepare": "npm run ios:assets && npm run ios:icon",
+    "ios:open": "open -a Xcode SynovaIOS/Synova.xcodeproj"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}
